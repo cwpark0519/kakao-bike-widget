@@ -1,19 +1,84 @@
 <!doctype html>
 <html lang="ko">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#171717">
-  <title>카카오바이크 위젯 미리보기</title>
-  <link rel="stylesheet" href="style.css">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#08090d">
+<title>카카오바이크 잠금화면 미리보기</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#090a0e;color:#fff;font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Noto Sans KR",sans-serif}
+.wrap{min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:18px 14px 32px}
+.top{width:min(100%,430px);display:flex;justify-content:space-between;color:#999;font-size:12px;margin:0 0 12px}
+.phone{width:min(100%,390px);min-height:820px;border:1px solid #303039;border-radius:42px;padding:14px 17px 26px;position:relative;overflow:hidden;background:linear-gradient(180deg,#18202b 0%,#111722 38%,#090b11 100%);box-shadow:0 25px 80px #000a}
+.wallpaper{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 22%,#536071 0%,#263342 30%,#141c28 60%,#090b11 100%);opacity:.8}
+.content{position:relative;z-index:1}
+.status{height:28px;display:flex;justify-content:space-between;align-items:center;padding:0 9px;font-size:14px;font-weight:650}
+.topspace{height:35px}
+.date{text-align:center;font-size:15px;font-weight:550;color:#f1f2f5;text-shadow:0 1px 8px #0008}
+.clock{text-align:center;font-size:86px;line-height:1.03;font-weight:250;letter-spacing:-5px;margin-top:4px;text-shadow:0 2px 15px #0007}
+.sub{text-align:center;color:#e3e5e9;font-size:13px;margin-top:8px}
+.spacer{height:85px}
+.section-label{font-size:12px;color:#e2e4e8;font-weight:650;margin:0 4px 9px;text-shadow:0 1px 5px #000}
+.notification{background:#252932eF;border:1px solid #ffffff24;border-radius:22px;overflow:hidden;box-shadow:0 8px 28px #0005;backdrop-filter:blur(22px)}
+.notif-head{display:flex;align-items:center;gap:9px;padding:12px 13px 8px}
+.appicon{width:27px;height:27px;border-radius:8px;background:#fee500;color:#161616;display:grid;place-items:center;font-size:16px}
+.appname{font-size:12px;font-weight:700;color:#f4f4f4;flex:1}
+.when{font-size:11px;color:#b7bac2}
+.notif-title{font-size:16px;font-weight:800;padding:1px 14px 5px}
+.notif-body{font-size:12px;line-height:1.5;color:#e2e3e7;padding:0 14px 12px}
+.art{padding:0 10px 10px}
+.art img{width:100%;height:auto;display:block;border-radius:13px}
+.quick{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:10px}
+button{border:0;border-radius:13px;padding:12px 8px;font-weight:750;font-size:13px;cursor:pointer}
+.pause{background:#414650;color:#fff}.return{background:#fee500;color:#171717}
+.state{text-align:center;font-size:11px;color:#ddd;margin-top:9px;min-height:16px}
+.bottom{display:flex;justify-content:space-between;align-items:center;margin:34px 8px 0}
+.round{width:46px;height:46px;border-radius:50%;background:#222a35d9;border:1px solid #ffffff22;display:grid;place-items:center;font-size:20px}
+.homebar{width:120px;height:5px;border-radius:9px;background:#fff;margin:22px auto 0;opacity:.9}
+.note{max-width:390px;text-align:center;color:#777;font-size:11px;line-height:1.6;margin:14px 5px 0}
+@media(max-height:850px){.phone{min-height:760px}.spacer{height:54px}.clock{font-size:76px}}
+</style>
 </head>
 <body>
-  <main class="page">
-    <p class="eyebrow">KAKAO BIKE · WIDGET PREVIEW</p>
-    <figure class="widget">
-      <img src="images/widget.png" alt="카카오바이크 반납 미완료 알림 위젯">
-    </figure>
-    <p class="caption">반납 미완료 알림 위젯</p>
-  </main>
-</body>
-</html>
+<div class="wrap">
+<div class="top"><span>카카오바이크 UX 프로토타입</span><span>잠금화면 웹 미리보기</span></div>
+<section class="phone">
+<div class="wallpaper"></div><div class="content">
+<div class="status"><span id="smalltime">9:41</span><span>●●●　◖　▰</span></div>
+<div class="topspace"></div>
+<div class="date" id="date">수요일, 11월 25일</div>
+<div class="clock" id="clock">9:41</div>
+<div class="sub">카카오바이크 이용 중</div>
+<div class="spacer"></div>
+<div class="section-label">알림</div>
+<div class="notification">
+<div class="notif-head"><div class="appicon">🚲</div><div class="appname">카카오바이크</div><div class="when" id="elapsed">지금</div></div>
+<div class="notif-title" id="title">아직 반납되지 않았어요!</div>
+<div class="notif-body" id="body">자전거가 아직 이용 중이에요. 이용 경과 시간을 확인하고 반납해 주세요.</div>
+<div class="art"><img src="assets/urgent-widget.png" alt="사용자가 제작한 미반납 긴급 알림 이미지"></div>
+</div>
+<div class="quick"><button class="pause" id="pause">일시정지</button><button class="return" id="return">반납 완료</button></div>
+<div class="state" id="state">이용 중 · 경과 시간 02:14</div>
+<div class="bottom"><div class="round">🔦</div><div class="round">📷</div></div>
+<div class="homebar"></div>
+</div></section>
+<div class="note">이 화면은 아이폰 잠금화면을 본뜬 웹 시뮬레이션입니다. 실제 iOS 잠금화면 알림은 발생하지 않으며, 아래 버튼으로 화면 상태를 체험할 수 있습니다.</div>
+</div>
+<script>
+let elapsed=2*3600+14*60,active=true,done=false;
+const $=x=>document.getElementById(x);
+function duration(s){let h=Math.floor(s/3600),m=Math.floor(s%3600/60);return String(h).padStart(2,'0')+':'+String(m).padStart(2,'0')}
+function paint(){
+ $('elapsed').textContent=done?'완료':duration(elapsed);
+ $('state').textContent=done?'반납 완료 · 긴급 알림 해제':(active?'이용 중':'일시정지')+' · 경과 시간 '+duration(elapsed);
+ $('title').textContent=done?'반납이 완료되었어요': '아직 반납되지 않았어요!';
+ $('body').textContent=done?'자전거 반납이 완료되어 미반납 알림이 종료되었어요.':'자전거가 아직 이용 중이에요. 이용 요금이 계속 발생할 수 있어요. 반납 상태를 확인해 주세요.';
+ $('pause').textContent=active?'일시정지':'이용 재개';$('pause').disabled=done;$('return').disabled=done;
+ $('pause').style.opacity=done?'.45':'1';$('return').style.opacity=done?'.45':'1';
+}
+$('pause').onclick=()=>{if(!done){active=!active;paint()}};
+$('return').onclick=()=>{done=true;active=false;paint()};
+function tick(){let n=new Date();$('clock').textContent=n.toLocaleTimeString('ko-KR',{hour:'2-digit',minute:'2-digit',hour12:false});$('smalltime').textContent=$('clock').textContent;$('date').textContent=n.toLocaleDateString('ko-KR',{weekday:'long',month:'long',day:'numeric'});if(active&&!done)elapsed++;paint()}
+tick();setInterval(tick,1000);
+</script>
+</body></html>
